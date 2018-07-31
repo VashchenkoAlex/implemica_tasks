@@ -1,7 +1,5 @@
 package tasks_with_tests;
 
-
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
@@ -16,16 +14,15 @@ import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emp
 /**
  * Unit testMain for simple App.
  */
-public class AppTest{
+public class AppTest {
 
-    private static final String MARKER = "New test:";
     private static final String ENTER_FIRST_VALUE_MESSAGE = "Enter first value";
     private static final String ENTER_SECOND_VALUE_MESSAGE = "Enter second value";
     private static final String WRONG_FIRST_VALUE_MESSAGE = "Wrong first value";
     private static final String WRONG_SECOND_VALUE_MESSAGE = "Wrong second value";
     private static final String OVER_MAX_LONG = "43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875";
-    private static final String[] FIRST_EXCEPTION_RESULT = {MARKER,ENTER_FIRST_VALUE_MESSAGE,WRONG_FIRST_VALUE_MESSAGE};
-    private static final String[] SECOND_EXCEPTION_RESULT = {MARKER,ENTER_FIRST_VALUE_MESSAGE,ENTER_SECOND_VALUE_MESSAGE,WRONG_SECOND_VALUE_MESSAGE};
+    private static final String[] FIRST_EXCEPTION_RESULT = {ENTER_FIRST_VALUE_MESSAGE,WRONG_FIRST_VALUE_MESSAGE};
+    private static final String[] SECOND_EXCEPTION_RESULT = {ENTER_FIRST_VALUE_MESSAGE,ENTER_SECOND_VALUE_MESSAGE,WRONG_SECOND_VALUE_MESSAGE};
 
     @Rule
     public final SystemOutRule systemOutStream = new SystemOutRule().enableLog();
@@ -412,9 +409,9 @@ public class AppTest{
 
     private void testMain(String first, String second){
 
-        System.out.println(MARKER);
+        systemOutStream.clearLog();
         String[] args = {};
-        String[] realResult = {MARKER,ENTER_FIRST_VALUE_MESSAGE,ENTER_SECOND_VALUE_MESSAGE,
+        String[] realResult = {ENTER_FIRST_VALUE_MESSAGE,ENTER_SECOND_VALUE_MESSAGE,
                 "After changes first is " + second + " and second is " + first};
         systemInMock.provideLines(first, second);
         App.main(args);
@@ -429,7 +426,7 @@ public class AppTest{
 
     private void testException(String first, String second, String[] result){
 
-        System.out.println(MARKER);
+        systemOutStream.clearLog();
         systemInMock.provideLines(first, second);
         App.main(new String[]{});
         assertThat(parseStringsFromLog(systemOutStream.getLog(),result.length), is(result));

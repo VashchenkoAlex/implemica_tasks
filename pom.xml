@@ -9,7 +9,6 @@
   <version>1.0</version>
 
   <name>tasks_with_tests</name>
-  <url>http://tasks_with_tests</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -73,6 +72,14 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+            <configuration>
+                <archive>
+                  <index>true</index>
+                  <manifest>
+                    <mainClass>implemica_tasks.App</mainClass>
+                  </manifest>
+                </archive>
+            </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -88,10 +95,10 @@
               <version>1.4.0</version>
               <configuration>
                   <targetClasses>
-                      <param>tasks*</param>
+                      <param>implemica_tasks*</param>
                   </targetClasses>
                   <targetTests>
-                      <param>tasks*</param>
+                      <param>implemica_tasks*</param>
                   </targetTests>
               </configuration>
           </plugin>
